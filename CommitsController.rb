@@ -26,7 +26,7 @@ class CommitsController < OSX::NSObject
     @current_commit_offset = 0
     @offset = 50
     @active_commit = nil
-    @branch = :master
+    @branch = `cd #{REPOSITORY_LOCATION}/.. && git branch | grep "*" | awk '{print $2}'`.strip.to_sym rescue :master
     @icon_queue = NSOperationQueue.alloc.init
     @icon_url_map = {}
     @icons = Hash.new do |hash, email|
